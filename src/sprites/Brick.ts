@@ -1,25 +1,30 @@
 import type { Vector } from "../types";
+import { Sprite } from "./Sprite";
 
-export class Brick {
+export class Brick extends Sprite {
   constructor(
-
-  );
-
-  /** Getter for the brick's width */
-  get width(): number;
-
-  /** Getter for the brick's height */
-  get height(): number;
-
-  /** Getter for the brick's position */
-  get pos(): { x: number; y: number };
-
-  /** Getter for the brick's image */
-  get image(): HTMLImageElement;
+    brickWidth: number,
+    brickHeight: number,
+    position: Vector,
+    private brickEnergy: number,
+    image: string,
+  ) {
+    super(
+      brickWidth,
+      brickHeight,
+      position,
+      image,
+    )
+    this.brickEnergy = brickEnergy
+  }
 
   /** Getter for the brick's energy */
-  get energy(): number;
+  get energy(): number {
+    return this.brickEnergy
+  }
 
   /** Setter to update the brick's energy level */
-  set energy(value: number);
+  set energy(value: number) {
+    this.brickEnergy = value
+  }
 }

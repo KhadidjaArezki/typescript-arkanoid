@@ -1,35 +1,47 @@
-import type { Vector } from "../types";
+import type { Vector } from "../types"
+import { Sprite } from "./Sprite"
 
-export class Ball {
+export class Ball extends Sprite {
+  private speed: Vector
+
   constructor(
-
-  );
-
-  /** Getter for ball's width */
-  get width(): number;
-
-  /** Getter for ball's height */
-  get height(): number;
-
-  /** Getter for ball's position */
-  get pos(): { x: number; y: number };
-
-  /** Getter for ball's image */
-  get image(): HTMLImageElement;
+    ballSize: number,
+    ballPosition: Vector,
+    speed: number,
+    image: string,
+  ) {
+    super(
+      ballSize,
+      ballSize,
+      ballPosition,
+      image,
+    )
+    this.speed = {
+      x: speed,
+      y: -speed,
+    }
+  }
 
   /**
    * Reverses the ball's Y direction (e.g., when hitting the paddle or top wall).
    */
-  changeYDirection(): void;
+  changeYDirection(): void {
+    this.speed.y = -this.speed.y
+  }
 
   /**
    * Reverses the ball's X direction (e.g., when hitting side walls).
    */
-  changeXDirection(): void;
+  changeXDirection(): void {
+    this.speed.x = -this.speed.x
+  }
 
   /**
    * Moves the ball based on its current speed.
    * Should be called every frame inside the game loop.
    */
-  moveBall(): void;
+  moveBall(): void {
+    this.pos.x += this.speed.x
+    this.pos.y += this.speed.y
+  }
 }
